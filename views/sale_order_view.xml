@@ -1,0 +1,28 @@
+<odoo>
+  <data>
+    <!-- Form view -->
+    <record id="custom_saleorder_form" model="ir.ui.view">
+      <field name="name">custom.saleorder.form</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='payment_term_id']" position="after">
+          <field name="sales_va" string="Sales VA"/>
+        </xpath>
+      </field>
+    </record>
+    <!-- Tree view -->
+    <record id="custom_saleorder_tree" model="ir.ui.view">
+      <field name="name">custom.saleorder.tree</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='activity_ids']" position="after">
+          <field name="sales_va" string="Sales VA" sum="Sum of Sales VA" optional="show"/>
+        </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>
+	
