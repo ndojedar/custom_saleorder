@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="sale_order_remainder_email_template" model="mail.template">
+			<field name="name">Recordatorio de vencimiento de pedido</field>
+			<field name="model_id" ref="sale.model_sale_order"/>
+			<field name="email_from">"${object.company_id.name | safe}" &lt;${(object.company_id.email or user.email) | safe}&gt;</field>			
+			<field name="email_to">${object.user_id.email | safe}</field>
+			<field name="subject">Recordatorio de pedido</field>
+			<field name="body_html" type="html">
+				<div style="margin: 0px; padding: 0px;">
+					<p style="margin: 0px; padding: 0px; font-size: 13px;"></p>
+						Estimad@  <strong>${object.user_id.name}</strong>,
+						<br /><br />
+						Le informamos que el pedido <strong>${object.name}</strong> vencerá el, <strong>${object.validity_date}</strong> y no ha sido validada.
+						<br /><br />
+						Pedido : <strong>${object.name}</strong><br />
+						Estado : <strong>${object.state}</strong><br />
+						Fecha del pedido : ${object.date_order}<br /><br />
+						No olvide valdar este pedido antes de la fecha de vencimiento.<br /><br /> 
+						% if object.partner_id.company_id:
+						Saludos,<br />
+						de <strong>${object.partner_id.company_id.name | safe}
+						</strong>
+						% endif
+				</div>
+			</field>
+		</record>
+
+		<record id="sale_before_order_remainder_email_template" model="mail.template">
+			<field name="name">Recordatorio de venta antes de vencimiento</field>
+			<field name="model_id" ref="sale.model_sale_order"/>
+			<field name="email_from">"${object.company_id.name | safe}" &lt;${(object.company_id.email or user.email) | safe}&gt;</field>			
+			<field name="email_to">${object.user_id.email | safe}</field>
+			<field name="subject">Recordatorio de pedido</field>
+			<field name="body_html" type="html">
+				<div style="margin: 0px; padding: 0px;">
+					<p style="margin: 0px; padding: 0px; font-size: 13px;"></p>
+						Estimad@  <strong>${object.user_id.name}</strong>,
+						<br /><br />
+						Este es un recordatorio de que su pedido vence. De acuerdo con nuestro registro el pedido <strong>${object.name}</strong> de 
+						<strong>
+							    % if object.partner_id.company_id:
+      							${object.partner_id.company_id.name | safe}
+  								% endif
+  						</strong> 
+  						vencerá en los próximos <strong>5 Días</strong> y no está validada. La fecha de vencimiento es <strong>${object.validity_date}</strong>.
+						<br /><br />
+						Por favor validar el pedido antes de la fecha de vencimiento.<br />
+						Pedido : <strong>${object.name}</strong><br />
+						Estado : <strong>${object.state}</strong><br />
+						Fecha del pedido : ${object.date_order}<br /><br />
+						Gracias,<br />
+				    	% if object.partner_id.company_id:
+						de <strong>${object.partner_id.company_id.name | safe}
+						</strong>
+						% endif
+				</div>
+			</field>
+		</record>
+		
+	</data>
+</odoo>

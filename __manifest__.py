@@ -25,6 +25,8 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
+        'data/sale_order_remainder_email.xml',
+		'data/sale_order_remainder_sheduler.xml',
         'views/sale_order_view.xml',
         # 'views/templates.xml',
     ],
